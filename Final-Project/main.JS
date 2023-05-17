@@ -20,17 +20,17 @@ function getRand(min, max) {
 
 const scene = new THREE.Scene();
 {
-  const color = "#010613";  // black
+  const color = "#000000";  // black
   const near = 45;
   const far = 155;
   scene.fog = new THREE.Fog(color, near, far);
 }
-scene.background = new THREE.Color("#000000");
+scene.background = new THREE.Color("#000003");
 
 
 //Camera
 const camera = new THREE.PerspectiveCamera( 45, sizes.width/sizes.height, 0.1, 700);
-camera.position.z = 150;
+camera.position.z = 130;
 scene.add( camera );
 
 
@@ -96,10 +96,10 @@ for (let i = 0; i < 5; i++){
 
 //buildings
 const buildingGeometry = new THREE.BoxGeometry(5, 5, 25);
-for (let i = 0; i < getRand(75, 90); i++){
+for (let i = 0; i < getRand(35, 50); i++){
   const buildings = [];
   buildings[i] = new THREE.Mesh( buildingGeometry, material);
-  buildings[i].position.set (getRand(-55, 55), getRand(-55, 55), getRand(5, 25));
+  buildings[i].position.set (getRand(-45, 45), getRand(-45, 45), getRand(5, 25));
   scene.add( buildings[i] );
 }
 
@@ -108,7 +108,7 @@ const glassCubeGeometry = new THREE.BoxGeometry(10, 10, 10);
 const glassCubes = [];
 for (let i = 0; i < 3; i++){
   glassCubes[i] = new THREE.Mesh( glassCubeGeometry, glassMaterial);
-  glassCubes[i].position.set (getRand(-35, 35), getRand(-35, 35), getRand(55, 75));
+  glassCubes[i].position.set (getRand(-35, 35), getRand(-35, 35), getRand(35, 55));
   scene.add ( glassCubes[i] ); 
 }
 
@@ -120,8 +120,8 @@ const smokeGeometry = new THREE.PlaneGeometry(300, 300);
 const smokeMaterial = new THREE.MeshLambertMaterial({
 
   map: smokeTexture,
-  color: "#051659",
-  opacity: 0.35,
+  color: "#00124C",
+  opacity: 0.75,
   transparent: true
 });
 
@@ -139,7 +139,11 @@ smokeParticles.push(smokeElement);
 
 
 //Light
-const light = new THREE.HemisphereLight("#ffffff", "#000000", 12.0);
+///const light = new THREE.HemisphereLight("#ffffff", "#000000", 12.0);
+///scene.add( light );
+
+const light = new THREE.PointLight(0xffffff, 25, 85);
+light.position.set(5, 5, 55);
 scene.add( light );
 
 
